@@ -18,7 +18,11 @@
 /// </summary>
 
 using UnityEngine;
+#if UNITY_2017_2_OR_NEWER
+using UnityEngine.XR;
+#else
 using UnityEngine.VR;
+#endif
 using System;
 using System.Runtime.InteropServices;
 #if UNITY_EDITOR

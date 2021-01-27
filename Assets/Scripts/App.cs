@@ -46,7 +46,7 @@ public class App : MonoBehaviour {
   // build, you need to call is something other that 'Tilt Brush', as that if a Google trademark -
   // see the BRANDING file for details.
   // As a minimum, you should change kAppDisplayName.
-  
+
   // This is the name of the app, as displayed to the users running it.
   public const string kAppDisplayName = "Open Source Tilt Brush";
   // The vendor name - used for naming android builds - shouldn't have spaces.
@@ -82,8 +82,8 @@ public class App : MonoBehaviour {
   private const string kProtocolHandlerPrefix = "tiltbrush://remix/";
   private const string kFileMoveFilename = "WhereHaveMyFilesGone.txt";
 
-  private const string kFileMoveContents = 
-      "All your " + kAppDisplayName + " files have been moved to\n" + 
+  private const string kFileMoveContents =
+      "All your " + kAppDisplayName + " files have been moved to\n" +
       "/sdcard/" + kAppFolderName + ".\n";
 
   public enum AppState {
@@ -586,8 +586,10 @@ public class App : MonoBehaviour {
       StartupError = true;
       CreateErrorDialog();
     } else {
+      #if !UNITY_2019_1_OR_NEWER
       Debug.LogFormat("Sdk mode: {0} XRDevice.model: {1}",
                       App.Config.m_SdkMode, UnityEngine.XR.XRDevice.model);
+      #endif
     }
 
     m_TargetFrameRate = VrSdk.GetHmdTargetFrameRate();
@@ -1953,7 +1955,7 @@ public class App : MonoBehaviour {
         foreach (ZipLibrary.ZipEntry entry in zip) {
           if (entry.IsFile && entry.Name.StartsWith(supportBeginning)) {
             // Create the directory if needed.
-            string fullPath = Path.Combine(App.SupportPath(), 
+            string fullPath = Path.Combine(App.SupportPath(),
                                            entry.Name.Substring(supportBeginning.Length));
             string directory = Path.GetDirectoryName(fullPath);
             if (!Directory.Exists(directory)) {

@@ -13,7 +13,11 @@
 // limitations under the License.
 
 using UnityEngine;
+#if UNITY_2017_2_OR_NEWER
+using UnityEngine.XR;
+#else
 using UnityEngine.VR;
+#endif
 
 // Recenter only the controller.
 // Usage: Set GvrControllerPointer > Controller as the pointer field, and

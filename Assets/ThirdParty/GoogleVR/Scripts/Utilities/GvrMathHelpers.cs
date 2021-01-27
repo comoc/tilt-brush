@@ -14,7 +14,11 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+#if UNITY_2017_2_OR_NEWER
+using UnityEngine.XR;
+#else
 using UnityEngine.VR;
+#endif
 using System.Collections;
 
 /// Helper functions to perform common math operations for Gvr.

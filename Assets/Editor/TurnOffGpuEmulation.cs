@@ -56,8 +56,10 @@ public static class TurnOffGpuEmulation {
   static void Execute() {
     if (Enabled) {
       if (!Menu.GetChecked(kGpuMenuString)) {
+        #if !UNITY_2019_1_OR_NEWER
         EditorApplication.ExecuteMenuItem(kGpuMenuString);
         Debug.LogWarning("GPU Emulation was turned on; turning off.");
+        #endif
       }
     }
   }

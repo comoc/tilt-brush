@@ -4,8 +4,6 @@
 //
 //=============================================================================
 
-#pragma warning disable 109, 618
-
 using UnityEngine;
 using System.Collections;
 using System.Reflection;
@@ -87,7 +85,7 @@ namespace Valve.VR
                 t.parent = origin;
 
                 while (head.childCount > 0)
-                    head.GetChild(0).SetParent(t);
+                    head.GetChild(0).parent = t;
 
                 // Keep the head around, but parent to the camera now since it moves with the hmd
                 // but existing content may still have references to this object.
@@ -215,7 +213,7 @@ namespace Valve.VR
                 transform.localScale = Vector3.one;
 
                 while (transform.childCount > 0)
-                    transform.GetChild(0).SetParent(head);
+                    transform.GetChild(0).parent = head;
 #if !UNITY_2017_2_OR_NEWER
                 var guiLayer = GetComponent<GUILayer>();
                 if (guiLayer != null)

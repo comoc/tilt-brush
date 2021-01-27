@@ -170,7 +170,9 @@ public class Config : MonoBehaviour {
   public String HeadsetModelName {
     get {
       if(string.IsNullOrEmpty(m_HeadsetModelName)) {
+        #if !UNITY_2019_1_OR_NEWER
         m_HeadsetModelName = UnityEngine.XR.XRDevice.model;
+        #endif
       }
       return m_HeadsetModelName;
     }
@@ -677,7 +679,12 @@ public class Config : MonoBehaviour {
 
     foreach (var group in buildTargetGroups) {
       // TODO use the public api (see BuildTiltBrush)
+
+      #if !UNITY_2019_1_OR_NEWER
       UnityEditorInternal.VR.VREditor.SetVirtualRealitySDKs(group, newDevices);
+      #else
+      UnityEditorInternal.VR.VREditor.SetVREnabledDevicesOnTargetGroup(group, newDevices); // Is this OK?
+      #endif
     }
   }
 

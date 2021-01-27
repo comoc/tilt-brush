@@ -751,15 +751,19 @@ static class BuildTiltBrush {
   class RestoreVrSdks : IDisposable {
     Dictionary<BuildTargetGroup, string[]> m_prev;
     public RestoreVrSdks() {
+      #if !UNITY_2019_1_OR_NEWER
       m_prev = new[] { BuildTargetGroup.Standalone, BuildTargetGroup.Android }
           .ToDictionary(
               btg => btg,
               btg => PlayerSettings.GetVirtualRealitySDKs(btg));
+      #endif
     }
     public void Dispose() {
+      #if !UNITY_2019_1_OR_NEWER
       foreach (var entry in m_prev) {
         PlayerSettings.SetVirtualRealitySDKs(entry.Key, entry.Value);
       }
+      #endif
     }
   }
 
@@ -1254,7 +1258,7 @@ static class BuildTiltBrush {
     }
   }
 
-  private static void ExecuteCopyRequests(List<CopyRequest> requests, string sourceBase, 
+  private static void ExecuteCopyRequests(List<CopyRequest> requests, string sourceBase,
                                           string destBase) {
     foreach (var copyRequest in requests) {
       string copySource = Path.Combine(sourceBase, copyRequest.source);

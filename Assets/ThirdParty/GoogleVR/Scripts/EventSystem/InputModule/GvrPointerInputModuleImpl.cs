@@ -14,7 +14,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+#if UNITY_2017_2_OR_NEWER
+using UnityEngine.XR;
+#else
 using UnityEngine.VR;
+#endif
 
 /// Implementation of _GvrPointerInputModule_
 public class GvrPointerInputModuleImpl {
